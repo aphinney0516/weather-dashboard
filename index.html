@@ -5,15 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header>Weather Dashboard</header>
     <aside>
+        <!-- Textbox for the user to input a city -->
         <section class="city-choice">
             <h1>Search for a City: </h1>
-            <!-- Textbox for the user to input a city -->
             <input 
                 type="text"
                 class="user-input"
@@ -21,20 +22,19 @@
                 placeholder="city">
             <button id="btnSearch" type="button" class="btn-search">search</button>
         </section>
-        <section class="city-list">
-            <!-- quick search buttons for major cities -->
+        <section class="city-search-history">
+            <!-- quick search buttons for past searches -->
         </section>
     </aside>
-    <details>
+    <main>
         <section class="current-forecast">
-            <!-- an h1 displays the city name, today's date, and an image of the weather -->
-            <!-- the current weather is displayed: high/low temp, wind speed, and humidity percentage -->
+
         </section>
         <section class="future-forecast">
             <h2>5-Day Forecast</h2>
-            <!-- 5 boxes in order L to R by date with wather image, high/low temp, wind speed, and humidity percentage for each -->
+            <!-- 5 boxes in order L to R by date with weather image, high/low temp, wind speed, and humidity percentage for each -->
         </section>
-    </details>
+    </main>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
