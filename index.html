@@ -11,12 +11,15 @@
 <body>
     <header>Weather Dashboard</header>
     <aside>
-        <section class="city-search">
+        <section class="city-choice">
             <h1>Search for a City: </h1>
             <!-- Textbox for the user to input a city -->
-            <div>
-            </div>
-            <button>Search</button>
+            <input 
+                type="text"
+                class="user-input"
+                id="cityChoice"
+                placeholder="city">
+            <button id="btnSearch" type="button" class="btn-search">search</button>
         </section>
         <section class="city-list">
             <!-- quick search buttons for major cities -->
