@@ -1,9 +1,12 @@
 var APIkey = 'f65595b77e670ba90372906e45ebf28b'
 var forecastArray = []
+var cities = JSON.parse(localStorage.getItem('cities'))||[]
+dayjs.extend(window.dayjs_plugin_utc)
+dayjs.extend(window.dayjs_plugin_timezone)
 
 function searchWeather(city) {
     // searches weather based on user city input or button click
-    var geoURL = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit=1&appid="+APIkey;
+    var geoURL = "https://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit=1&appid="+APIkey;
     fetch(geoURL).then(function(response){
     return response.json();
     }).then(function(data){
@@ -21,9 +24,22 @@ function searchWeather(city) {
     })
    
 }
-
+for (var i = 0; i<cities.length; i++) {
+    var button = document.createElement('button')
+    button.setAttribute('value',cities[i])
+    button.textContent=cities[i]
+    button.onclick=function(){
+        searchWeather(this.value)
+    }
+    document.querySelector('.city-search-history').append(button)
+}
 function showWeather(data) {
     // displays the weather user city search or button click
+    if (!cities.includes(data.name)) {
+        cities.push(data.name)
+        localStorage.setItem('cities', JSON.stringify(cities))
+    }
+    document.querySelector('.current-forecast').innerHTML=''
     console.log(data);
     var mainCard = document.createElement("div")
     mainCard.classList.add("card")
@@ -57,32 +73,33 @@ function showForecast(data) {
         var mainCard = document.createElement("div")
         mainCard.classList.add("card")
         var cardBody = document.createElement("div")
+        var cardTitle = document.createElement('h5')
+        cardTitle.classList.add('card-title')
+        cardTitle.textContent=dayjs(data[i].dt_txt).format('M/D')
         cardBody.classList.add("card-body")
+        var tempEl = document.createElement("p")
+        tempEl.classList.add("card-text")
+        tempEl.textContent="temperature:"+data[i].main.temp
+        var humidityEl = document.createElement("p")
+        humidityEl.classList.add("card-text")
+        humidityEl.textContent="humidity:"+data[i].main.humidity+"%"
+        var windEl = document.createElement("p")
+        windEl.classList.add("card-text")
+        windEl.textContent="wind-speed:"+Math.round(data[i].wind.speed)+"mph"
+        var icon = document.createElement("img")
+        icon.setAttribute("src",`http://openweathermap.org/img/wn/${data[i].weather[0].icon}.png`)
+        cardTitle.appendChild(icon)
+        cardBody.appendChild(cardTitle)
+        cardBody.appendChild(tempEl)
+        cardBody.appendChild(humidityEl)
+        cardBody.appendChild(windEl)
         mainCard.appendChild(cardBody)
-        document.getElementById("forecastContainer").appendChild(mainCard)
-        
+        document.getElementById("forecastContainer").appendChild(mainCard)     
     }
-//     var cardTitle = document.createElement("h3")
-//     cardTitle.classList.add("card-title")
-//     cardTitle.textContent=data.name
-//     var tempEl = document.createElement("p")
-//     tempEl.classList.add("card-text")
-//     tempEl.textContent="temperature:"+data.main.temp
-//     var humidityEl = document.createElement("p")
-//     humidityEl.classList.add("card-text")
-//     humidityEl.textContent="humidity:"+data.main.humidity+"%"
-//     var windEl = document.createElement("p")
-//     windEl.classList.add("card-text")
-//     windEl.textContent="wind-speed:"+Math.round(data.wind.speed)+"mph"
-//     var icon = document.createElement("img")
-//     icon.setAttribute("src",`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
-//     cardTitle.append(icon)
-//     cardBody.append(cardTitle, tempEl,humidityEl,windEl)
-//     document.querySelector(".current-forecast").appendChild(mainCard);
 }
 
 function fetchFiveDay(lat,lon) {
-    var URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}`
+    var URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${APIkey}`
     fetch(URL).then(function(response){
         return response.json();
         }).then(function(data){

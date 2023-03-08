@@ -11,31 +11,38 @@
 </head>
 <body>
     <header>Weather Dashboard</header>
-    <aside>
-        <!-- Textbox for the user to input a city -->
-        <section class="city-choice">
-            <h1>Search for a City: </h1>
-            <input 
-                type="text"
-                class="user-input"
-                id="cityChoice"
-                placeholder="city">
-            <button id="btnSearch" type="button" class="btn-search">search</button>
-        </section>
-        <section class="city-search-history">
-            <!-- quick search buttons for past searches -->
-        </section>
-    </aside>
-    <main>
-        <section class="current-forecast">
+    <main class="row" style="border:2px solid red">
+        <aside class="col-3">
+            <!-- Textbox for the user to input a city -->
+            <section class="city-choice">
+                <h1>Search for a City: </h1>
+                <input 
+                    type="text"
+                    class="user-input"
+                    id="cityChoice"
+                    placeholder="city">
+                <button id="btnSearch" type="button" class="btn-search">search</button>
+            </section>
+            <section class="city-search-history">
+                <!-- quick search buttons for past searches -->
+            </section>
+
+        </aside>
+        <section class="current-forecast col-8">
 
         </section>
+    </main>
+    
+
         <!-- 5 boxes in order L to R by date with weather image, high/low temp, wind speed, and humidity percentage for each -->
         <section class="future-forecast">
             <h2>5-Day Forecast</h2>
             <div class="row" id="forecastContainer"></div>
         </section>
-    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js" integrity="sha512-hcV6DX35BKgiTiWYrJgPbu3FxS6CsCjKgmrsPRpUPkXWbvPiKxvSVSdhWX0yXcPctOI2FJ4WP6N1zH+17B/sAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/plugin/utc.min.js" integrity="sha512-z84O912dDT9nKqvpBnl1tri5IN0j/OEgMzLN1GlkpKLMscs5ZHVu+G2CYtA6dkS0YnOGi3cODt3BOPnYc8Agjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/plugin/timezone.min.js" integrity="sha512-fG1tT/Wn/ZOyH6/Djm8HQBuqvztPQdK/vBgNFLx6DQVt3yYYDPN3bXnGZT4z4kAnURzGQwAnM3CspmhLJAD/5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
